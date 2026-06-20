@@ -1,0 +1,22 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite database (gets regenerated automatically on startup)
+*.db
+
+# Environment variable files (keep secrets out of git)
+.env
+.env.*
+
+# Virtual environment folders
+venv/
+env/
+.venv/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

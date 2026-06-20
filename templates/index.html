@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- =========================================================================
+  index.html
+  ---------------------------------------------------------------------------
+  This is the ONLY HTML page in the app (it's a "single page app").
+  JavaScript (static/script.js) fills in all the data by calling our Flask API.
+  Chart.js is loaded from a CDN to draw the charts.
+========================================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rate My Professor — Sentiment Analyzer</title>
+
+  <!-- Our stylesheet. url_for builds the correct path to /static/style.css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+  <!-- Chart.js from a CDN (no install needed — just loads from the internet) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <!-- ===================== HEADER / TOP BAR ============================ -->
+  <header class="top-bar">
+    <h1>🎓 Rate My Professor — Sentiment Analyzer</h1>
+
+    <div class="top-bar-buttons">
+      <!-- Re-run the scraper + analyzer on the server -->
+      <button id="refreshBtn" class="btn">🔄 Refresh Data</button>
+      <!-- Download all reviews as CSV -->
+      <button id="exportBtn" class="btn">⬇️ Export CSV</button>
+      <!-- Switch between light and dark themes -->
+      <button id="themeBtn" class="btn">🌙 Dark Mode</button>
+    </div>
+  </header>
+
+  <!-- A small status line for messages like "Refreshing..." -->
+  <p id="statusMessage" class="status-message"></p>
+
+  <main>
+    <!-- ===================== SUMMARY CARDS ============================ -->
+    <section class="cards">
+      <div class="card">
+        <h3 id="totalReviews">—</h3>
+        <p>Total Reviews</p>
+      </div>
+      <div class="card">
+        <h3 id="totalProfessors">—</h3>
+        <p>Professors</p>
+      </div>
+      <div class="card">
+        <h3 id="positivePct">—</h3>
+        <p>Positive Reviews</p>
+      </div>
+    </section>
+
+    <!-- ===================== SEARCH BAR =============================== -->
+    <section class="search-section">
+      <h2>🔍 Search a Professor</h2>
+      <div class="search-row">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Type a professor's name, e.g. Turing"
+        />
+        <button id="searchBtn" class="btn">Search</button>
+      </div>
+      <!-- Search results get injected here by JavaScript -->
+      <div id="searchResults" class="search-results"></div>
+    </section>
+
+    <!-- ===================== CHARTS GRID ============================== -->
+    <section class="charts-grid">
+      <div class="chart-box">
+        <h2>Top 5 Rated Professors</h2>
+        <canvas id="topChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h2>Bottom 5 Rated Professors</h2>
+        <canvas id="bottomChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h2>Overall Sentiment</h2>
+        <canvas id="donutChart"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <h2>Department Averages</h2>
+        <canvas id="deptChart"></canvas>
+      </div>
+    </section>
+
+    <!-- ===================== REVIEWS TABLE ============================ -->
+    <section class="table-section">
+      <h2>All Reviews</h2>
+      <p class="hint">Click the "Score" column header to sort by sentiment.</p>
+      <table id="reviewsTable">
+        <thead>
+          <tr>
+            <th>Professor</th>
+            <th>Department</th>
+            <th>Review</th>
+            <!-- This header is clickable to sort by score -->
+            <th id="scoreHeader" class="sortable">Score ⬍</th>
+            <th>Sentiment</th>
+          </tr>
+        </thead>
+        <tbody id="reviewsBody">
+          <!-- Rows injected by JavaScript -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with Python, Flask, VADER &amp; Chart.js · Data is mock data by default</p>
+  </footer>
+
+  <!-- Our JavaScript. Loaded at the end so the HTML exists before it runs. -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

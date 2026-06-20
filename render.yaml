@@ -1,0 +1,25 @@
+# =============================================================================
+# render.yaml
+# -----------------------------------------------------------------------------
+# This file tells Render.com how to build and run our app automatically.
+# When you connect your GitHub repo, Render reads this and sets everything up.
+# =============================================================================
+
+services:
+  # We define one web service (our Flask app).
+  - type: web
+    name: rate-my-professor-sentiment
+    runtime: python
+    plan: free                       # use Render's free tier
+
+    # Install all our Python dependencies.
+    buildCommand: "pip install -r requirements.txt"
+
+    # Run the app with gunicorn in production.
+    # "app:app" means: in the file app.py, use the variable named `app`.
+    startCommand: "gunicorn app:app"
+
+    # Pin a Python version Render supports.
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.4"
