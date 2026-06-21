@@ -1,0 +1,33 @@
+# Keep the build context small and the image clean.
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite database (regenerated on startup by bootstrap())
+*.db
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment / secret files
+.env
+.env.*
+
+# Git
+.git/
+.gitignore
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docs and platform configs not needed inside the image
+README.md
+render.yaml
+.claude/
