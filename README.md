@@ -1,3 +1,13 @@
+---
+title: Rate My Professor
+emoji: 📉
+colorFrom: purple
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🎓 Rate My Professor — Sentiment Analyzer
 
 A full-stack web app that collects professor reviews, scores each one with
