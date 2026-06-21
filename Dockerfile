@@ -1,28 +1,28 @@
 # =============================================================================
-# Dockerfile — builds the container image GCP Cloud Run will run.
+# Dockerfile — Hugging Face Spaces deployment.
+# HF Spaces routes traffic to port 7860 and runs containers as a non-root user.
 # =============================================================================
 
-# Start from a small, official Python image.
-FROM python:3.12-slim
+FROM python:3.9
 
-# Don't write .pyc files and flush logs straight to the console (better for Cloud Run logs).
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# HF Spaces best practice: run as a non-root user with uid 1000.
+RUN useradd -m -u 1000 user
+USER user
+ENV PATH="/home/user/.local/bin:$PATH"
 
-# All app files live here inside the container.
+# Create the working directory AFTER switching users so `user` owns it
+# (the app writes reviews.db here on startup).
 WORKDIR /app
 
-# Install dependencies first so Docker can cache this layer between builds.
-COPY requirements.txt .
+# Install dependencies first for better build caching.
+COPY --chown=user requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code.
-COPY . .
+COPY --chown=user . .
 
-# Cloud Run sends traffic to the port in the $PORT env var (defaults to 8080).
-ENV PORT=8080
-EXPOSE 8080
+# HF Spaces expects the app on port 7860.
+EXPOSE 7860
 
-# Start the app with gunicorn. "app:app" = the `app` object inside app.py.
-# Shell form is used so $PORT gets expanded at runtime.
-CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120 app:app
+# Start the Flask app.
+CMD ["python", "app.py"]
