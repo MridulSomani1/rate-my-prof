@@ -8,7 +8,7 @@ app_port: 7860
 pinned: false
 ---
 
-# 🎓 Rate My Professor — Sentiment Analyzer
+# 🎓 Rate My Professor, Sentiment Analyzer
 
 A full-stack web app that collects professor reviews, scores each one with
 **VADER sentiment analysis**, and shows the results on an interactive dashboard
@@ -23,7 +23,7 @@ jQuery.
 ## ✨ Features
 
 - Scrapes reviews (uses a built-in **mock dataset of 50 reviews / 10 professors
-  / 4 departments** by default — see `scraper.py` to swap in real scraping)
+  / 4 departments** by default, see `scraper.py` to swap in real scraping)
 - Runs VADER sentiment analysis on every review → Positive / Neutral / Negative
 - Dashboard with 4 charts: Top 5, Bottom 5, sentiment donut, department averages
 - Search any professor and see their full review breakdown
@@ -93,16 +93,16 @@ fills the dashboard.
 
 ---
 
-## 🚀 Deploy live to the internet (Render.com — free)
+## 🚀 Deploy live to the internet (Render.com, free)
 
 Follow these steps in order. This gets you a public URL anyone can visit.
 
-### Step 1 — Put the code on GitHub
+### Step 1 Put the code on GitHub
 
 1. Create a free account at **https://github.com** if you don't have one.
 2. Click the **+** in the top-right → **New repository**.
 3. Name it `rate-my-professor-sentiment`, keep it **Public**, and click
-   **Create repository**. (Don't add a README — you already have one.)
+   **Create repository**. (Don't add a README, you already have one.)
 4. Open a terminal **inside this project folder** and run:
 
    ```bash
@@ -115,18 +115,18 @@ Follow these steps in order. This gets you a public URL anyone can visit.
    git push -u origin main
    ```
 
-   Refresh your GitHub page — all your files should now be there.
+   Refresh your GitHub page, all your files should now be there.
 
-### Step 2 — Connect the repo to Render
+### Step 2 Connect the repo to Render
 
-1. Create a free account at **https://render.com** (sign up with GitHub — it's
+1. Create a free account at **https://render.com** (sign up with GitHub, it's
    easiest).
 2. On the dashboard click **New +** → **Web Service**.
 3. Choose **Build and deploy from a Git repository** → **Next**.
 4. Find and **Connect** your `rate-my-professor-sentiment` repo. (You may need
    to click "Configure account" to give Render access to it.)
 
-### Step 3 — Configure the service
+### Step 3 Configure the service
 
 Render reads `render.yaml` automatically, so most fields fill in for you. Confirm:
 
@@ -137,9 +137,9 @@ Render reads `render.yaml` automatically, so most fields fill in for you. Confir
 
 Then click **Create Web Service**.
 
-### Step 4 — Get your live link
+### Step 4 Get your live link
 
-1. Render now installs everything and starts the app. Watch the **Logs** tab —
+1. Render now installs everything and starts the app. Watch the **Logs** tab,
    wait until you see something like `Booting worker` and the status turns
    **Live** (the first build takes a few minutes).
 2. Your public URL appears at the top of the page, e.g.:
@@ -148,13 +148,13 @@ Then click **Create Web Service**.
    https://rate-my-professor-sentiment.onrender.com
    ```
 
-3. Open it — your dashboard is now live on the internet! 🎉
+3. Open it, your dashboard is now live on the internet! 🎉
 
 > **Note on the free tier:** Render free services "sleep" after ~15 minutes of
 > no traffic. The next visit takes ~30–60 seconds to wake up. That's normal.
 >
 > Also, the SQLite database lives on the server's temporary disk, so it resets
-> when the app restarts — but because the data is seeded automatically on
+> when the app restarts, but because the data is seeded automatically on
 > startup, the dashboard always repopulates itself. Nothing breaks.
 
 ### Updating later
@@ -172,7 +172,7 @@ git push
 
 ## 🔄 Swapping mock data for real scraping
 
-Open `scraper.py` and read the big comment block at the top — it explains
+Open `scraper.py` and read the big comment block at the top, it explains
 exactly how to point `scrape_real_reviews()` at real Rate My Professors pages
 and have `get_reviews()` use them, falling back to mock data if the site blocks
 the request.
