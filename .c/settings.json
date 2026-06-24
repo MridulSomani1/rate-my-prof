@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Force | Select-Object Name; Write-Output \"---PYTHON---\"; \\(Get-Command python -ErrorAction SilentlyContinue\\).Source)",
+      "PowerShell(python -m pip install -r requirements.txt --quiet --disable-pip-version-check 2>&1 | Select-Object -Last 15; Write-Output \"EXITCODE=$LASTEXITCODE\")",
+      "Bash(git pull *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
